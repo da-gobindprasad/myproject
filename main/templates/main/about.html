@@ -1,0 +1,74 @@
+{% extends 'main/base.html' %} {% load static %} 
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<!-- About Hero Section -->
+<section class="bg-light py-5">
+  <div class="container text-center">
+    <h1 class="fw-bold display-5 mb-3">About CleanScotland</h1>
+    <p class="lead">Delivering excellence in cleaning services across homes, offices, and commercial spaces in Scotland.</p>
+  </div>
+</section>
+
+<!-- About Content Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      
+      <!-- Image -->
+      <div class="col-md-6">
+        <img src="{% static 'main/images/service3.png' %}" alt="Cleaning team" class="img-fluid rounded shadow">
+      </div>
+      
+      <!-- Text Content -->
+      <div class="col-md-6">
+        <h2 class="fw-bold">Who We Are</h2>
+        <p class="mb-3">CleanScotland is a dedicated team of certified cleaning professionals, committed to bringing hygiene, clarity, and comfort into your space.</p>
+        <ul class="list-unstyled">
+          <li class="mb-2">✅ Over <strong>10 years of experience</strong> in the cleaning industry</li>
+          <li class="mb-2">✅ Fully <strong>background-checked and trained staff</strong></li>
+          <li class="mb-2">✅ Use of <strong>eco-friendly & safe cleaning products</strong></li>
+          <li class="mb-2">✅ Flexible packages for <strong>homes, offices, and industrial sites</strong></li>
+          <li class="mb-2">✅ Rated <strong>5 stars by hundreds of happy clients</strong></li>
+        </ul>
+        <a href="/services/" class="btn btn-primary mt-3">Explore Our Services</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="bg-primary text-white py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">Why Choose CleanScotland?</h2>
+    <div class="row text-center g-4">
+
+      <div class="col-md-4">
+        <div class="p-3">
+          <i class="bi bi-star-fill display-5"></i>
+          <h5 class="fw-bold mt-3">Trusted Professionals</h5>
+          <p>Our team is experienced, background-checked, and customer-focused.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-3">
+          <i class="bi bi-clock-fill display-5"></i>
+          <h5 class="fw-bold mt-3">Flexible Scheduling</h5>
+          <p>Book services at your convenience — weekdays or weekends.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-3">
+          <i class="bi bi-shield-lock-fill display-5"></i>
+          <h5 class="fw-bold mt-3">100% Satisfaction</h5>
+          <p>We don’t leave until you’re happy. Guaranteed.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

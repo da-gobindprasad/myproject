@@ -121,3 +121,24 @@ def services(request):
         {'title': 'Fridge & Appliance', 'description': 'Cleaning kitchen equipment.', 'icon': '🧊', 'image': 'main/images/service4.png'},
     ]
     return render(request, 'main/services.html', {'services': services})
+
+def about(request):
+    return render(request, 'main/about.html')
+
+
+from django.shortcuts import render
+from django.contrib import messages
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        # For now, just show a success message
+        messages.success(request, "Thank you for contacting us! We’ll get back to you shortly.")
+        
+        # You can later handle sending email here
+        return render(request, 'main/contact.html', {'submitted': True})
+    
+    return render(request, 'main/contact.html')
