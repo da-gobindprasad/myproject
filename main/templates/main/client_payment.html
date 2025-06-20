@@ -1,147 +1,171 @@
 {% extends 'main/base.html' %}
 {% load static %}
-{% block title %}Client & Payment{% endblock %}
+{% block title %}Client Payment{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <div class="row">
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="row g-4">
 
-    <!-- LEFT: Client Info -->
-    <div class="col-md-7">
-      <h2 class="fw-bold mb-4">Client Details</h2>
+          <!-- 🔹 Left: Payment Form -->
+          <div class="col-md-7">
+            <div class="card shadow-sm border-0">
+              <div class="card-header bg-primary text-white text-center">
+                <h4 class="mb-0">Make a Payment</h4>
+                <small>Enter your billing information</small>
+              </div>
+              <div class="card-body">
+                <form method="post" action="{% url 'booking_confirm' %}">
+                  {% csrf_token %}
 
-      <form method="post" onsubmit="return prepareFinalAmount()">
-        {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="clientName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="clientName" name="clientName" required>
+                  </div>
 
-        <div class="mb-3">
-          <label class="form-label">Full Name</label>
-          <input type="text" class="form-control" name="name" required>
-        </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                  </div>
 
-        <div class="mb-3">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-control" name="email" required>
-        </div>
+                  <div class="mb-3">
+                    <label for="address" class="form-label">Full Address</label>
+                    <input type="text" class="form-control" id="address" name="address" required>
+                  </div>
 
-        <div class="mb-3">
-          <label class="form-label">Phone Number</label>
-          <input type="tel" class="form-control" name="phone" required>
-        </div>
+                  <div class="mb-3">
+                    <label for="zip" class="form-label">Zip / Postal Code</label>
+                    <input type="text" class="form-control" id="zip" name="zip" required>
+                  </div>
 
-        <div class="mb-3">
-          <label class="form-label">Complete Address</label>
-          <textarea class="form-control" name="address" rows="3" required></textarea>
-        </div>
+                  <div class="mb-3">
+                    <label for="service" class="form-label">Service Name</label>
+                    <input type="text" class="form-control" id="service" name="service" placeholder="End of Tenancy Cleaning" required>
+                  </div>
 
-        <hr class="my-4">
-        <h4 class="mb-3">Payment Options</h4>
+                  <!-- 🔹 Payment Option -->
+                  <div class="mb-3">
+                    <label class="form-label d-block">Payment Type</label>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="payment_type" id="fullPayment" checked>
+                      <label class="form-check-label" for="fullPayment">Pay Full Amount</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="payment_type" id="partialPayment">
+                      <label class="form-check-label" for="partialPayment">Pay £20 Now</label>
+                    </div>
+                  </div>
 
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="radio" name="payment_option" id="pay20" value="partial" checked onclick="updatePayment(false)">
-          <label class="form-check-label" for="pay20">
-            Pay £20 now, rest before service
-          </label>
-        </div>
+                  <!-- 🔸 Amount Field -->
+                  <div class="mb-3">
+                    <label for="amount" class="form-label">Amount (£)</label>
+                    <input type="number" class="form-control" id="amount" name="amount" required>
+                  </div>
 
-        <div class="form-check mb-4">
-          <input class="form-check-input" type="radio" name="payment_option" id="payFull" value="full" onclick="updatePayment(true)">
-          <label class="form-check-label" for="payFull">
-            Pay full now & get 5% discount
-          </label>
-        </div>
+                  <!-- 🔐 Card Details -->
+                  <div class="mb-3">
+                    <label for="cardNumber" class="form-label">Card Number</label>
+                    <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+                  </div>
 
-        <input type="hidden" name="final_amount" id="finalAmountInput" value="">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="expiry" class="form-label">Expiry Date</label>
+                      <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/YY" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="cvc" class="form-label">CVC</label>
+                      <input type="text" class="form-control" id="cvc" name="cvc" required>
+                    </div>
+                  </div>
 
-        <button type="submit" class="btn btn-success px-5">Confirm Booking</button>
-      </form>
-    </div>
+                  <button type="submit" class="btn btn-primary w-100 mt-2">Pay Now</button>
+                </form>
+              </div>
+            </div>
+          </div>
 
-    <!-- RIGHT: Summary -->
-    <div class="col-md-5 mt-5 mt-md-0">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="fw-bold mb-3">Amount Summary</h5>
+          <!-- 🔸 Right: Payment Summary -->
+          <div class="col-md-5">
+            <div class="card shadow-sm border-0">
+              <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Payment Summary</h5>
+              </div>
+              <div class="card-body">
+<ul class="list-group list-group-flush">
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Service</span>
+    <strong>End of Tenancy</strong>
+  </li>
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Name</span>
+    <strong>John Smith</strong>
+  </li>
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Address</span>
+    <strong>123 Queen Street</strong>
+  </li>
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Zip Code</span>
+    <strong>EH1 2AD</strong>
+  </li>
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Paid Now</span>
+    <strong id="summaryAmount">£100</strong>
+  </li>
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Remaining Due</span>
+    <strong id="summaryRemaining">£0</strong>
+  </li>
+</ul>
 
-          <p class="d-flex justify-content-between">
-            <span>Service Price:</span>
-            <span id="price">£{{ total }}</span>
-          </p>
 
-          <p class="d-flex justify-content-between text-success" id="discountRow" style="display: none;">
-            <span>5% Discount:</span>
-            <span id="discount">−£0.00</span>
-          </p>
-
-          <p class="d-flex justify-content-between text-danger" id="balanceRow">
-            <span>Balance to Pay Later:</span>
-            <span id="balance">£0.00</span>
-          </p>
-
-          <hr>
-
-          <p class="d-flex justify-content-between fw-bold">
-            <span>Total Pay Now:</span>
-            <span id="payable">£20</span>
-          </p>
-        </div>
+                <div class="text-center mt-4">
+                  <img src="{% static 'main/images/secure.png' %}" alt="Secure" class="img-fluid" style="max-height: 50px;">
+                  <p class="text-muted small mt-2">Your payment is 100% secure</p>
+                </div>
+              </div>
+            </div>
+          </div>
+<div class="text-center mt-3">
+  <a href="{% url 'booking_confirm' %}" class="btn btn-outline-success w-100">Go to Confirmation Page</a>
+</div>
+        </div><!-- row -->
       </div>
     </div>
-
   </div>
-</div>
+</section>
 
-<!-- JS to calculate price -->
+<!-- ✅ JavaScript for Dynamic Update -->
 <script>
-  const servicePrice = parseFloat('{{ total }}');
-  const discountRate = 0.05;
+  document.addEventListener("DOMContentLoaded", function () {
+    const amountField = document.getElementById("amount");
+    const fullRadio = document.getElementById("fullPayment");
+    const partialRadio = document.getElementById("partialPayment");
+    const summaryAmount = document.getElementById("summaryAmount");
+    const summaryRemaining = document.getElementById("summaryRemaining");
 
-  const priceEl = document.getElementById("price");
-  const discountEl = document.getElementById("discount");
-  const discountRow = document.getElementById("discountRow");
+    const fullAmount = 100;
+    const partialAmount = 20;
 
-  const payableEl = document.getElementById("payable");
-  const balanceEl = document.getElementById("balance");
-  const balanceRow = document.getElementById("balanceRow");
+    function updateAmount() {
+      let paidNow = fullRadio.checked ? fullAmount : partialAmount;
+      let remaining = fullAmount - paidNow;
 
-  function updatePayment(fullPay) {
-    priceEl.textContent = `£${servicePrice.toFixed(2)}`;
+      amountField.value = paidNow;
+      amountField.readOnly = !fullRadio.checked;
 
-    if (fullPay) {
-      const discount = servicePrice * discountRate;
-      const final = servicePrice - discount;
-
-      discountEl.textContent = `−£${discount.toFixed(2)}`;
-      payableEl.textContent = `£${final.toFixed(2)}`;
-      balanceEl.textContent = `£0.00`;
-
-      discountRow.style.display = "flex";
-      balanceRow.style.display = "flex";
-    } else {
-      const balance = servicePrice - 20;
-
-      discountEl.textContent = `−£0.00`;
-      payableEl.textContent = `£20.00`;
-      balanceEl.textContent = `£${balance.toFixed(2)}`;
-
-      discountRow.style.display = "none";
-      balanceRow.style.display = "flex";
-    }
-  }
-
-  function prepareFinalAmount() {
-    const fullPay = document.getElementById('payFull').checked;
-    let finalAmount = 0;
-    if (fullPay) {
-      const discount = servicePrice * discountRate;
-      finalAmount = servicePrice - discount;
-    } else {
-      finalAmount = 20;
+      summaryAmount.textContent = `£${paidNow}`;
+      summaryRemaining.textContent = `£${remaining}`;
     }
 
-    document.getElementById('finalAmountInput').value = finalAmount.toFixed(2);
-    return true;
-  }
+    fullRadio.addEventListener("change", updateAmount);
+    partialRadio.addEventListener("change", updateAmount);
 
-  updatePayment(false);
+    updateAmount(); // Set on page load
+  });
 </script>
+
 {% endblock %}

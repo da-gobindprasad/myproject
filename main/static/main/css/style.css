@@ -88,3 +88,82 @@ html {
 .contact-float:hover {
   background: #084298;
 }
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #0d6efd;
+}
+
+.active-link {
+  color: #0d6efd !important;
+  border-bottom: 2px solid #0d6efd;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+/* Glass Effect Navbar */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Gradient logo text */
+.text-gradient {
+  background: linear-gradient(90deg, #0d6efd, #6610f2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Nav links */
+.navbar-nav .nav-link {
+  position: relative;
+  font-weight: 500;
+  color: #333;
+  padding: 0.4rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #0d6efd;
+}
+
+/* Animated underline */
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: #0d6efd;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.navbar-nav .nav-link.active-link {
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+.navbar-nav:hover .nav-link:hover ~ .nav-indicator {
+  left: 0;
+}
+
+/* Hover grow */
+.login-btn {
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4);
+}

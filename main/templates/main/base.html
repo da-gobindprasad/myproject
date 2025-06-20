@@ -17,40 +17,44 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-light shadow-sm">
-  <div class="container">
-    <div class="row w-100 align-items-center">
-      
-      <!-- Left: Logo -->
-      <div class="col-4 col-lg-3">
-        <a class="navbar-brand fw-bold" href="#">Scotland Cleaning Services</a>
-      </div>
+<nav class="navbar navbar-expand-lg glass-nav shadow-sm sticky-top py-3">
+  <div class="container position-relative">
 
-      <!-- Center: Navigation Links -->
-      <div class="col-4 col-lg-6 d-flex justify-content-center">
-        <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/services/">Our Services</a></li>
-            <li class="nav-item"><a class="nav-link" href="/about/">About Us</a></li>
-            <li class="nav-item"><a class="nav-link" href="/contact/">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold fs-4 text-gradient m-0" href="#">Scotland Cleaners</a>
 
-      <!-- Right: Login -->
-      <div class="col-4 col-lg-3 text-end">
-        <a href="#" class="btn btn-primary d-none d-lg-inline">Login</a>
-      </div>
-
-    </div>
-
-    <!-- Mobile Toggle -->
-    <button class="navbar-toggler position-absolute end-0 me-3" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+    <!-- Toggler for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+      <ul class="navbar-nav align-items-center gap-lg-4 gap-2 ms-auto position-relative">
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/' %}active-link{% endif %}" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/services/' %}active-link{% endif %}" href="/services/">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/about/' %}active-link{% endif %}" href="/about/">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/contact/' %}active-link{% endif %}" href="/contact/">Contact</a>
+        </li>
+        <li class="nav-item d-none d-lg-inline">
+          <a href="#" class="btn btn-primary px-4 py-2 rounded-pill shadow login-btn">Login</a>
+        </li>
+
+        <!-- Animated underline -->
+        <span class="nav-indicator"></span>
+      </ul>
+    </div>
   </div>
 </nav>
+
 
 
     <main class="container my-5">
@@ -61,5 +65,31 @@
     <footer class="text-center py-3 bg-light text-muted">
         &copy; 2025 MyCompany. All rights reserved.
     </footer>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const amountField = document.getElementById("amount");
+    const fullRadio = document.getElementById("fullPayment");
+    const partialRadio = document.getElementById("partialPayment");
+
+    const fullAmount = 100;  // You can later make this dynamic
+
+    function updateAmount() {
+      if (partialRadio.checked) {
+        amountField.value = 20;
+        amountField.readOnly = true;
+      } else {
+        amountField.value = fullAmount;
+        amountField.readOnly = false;
+      }
+    }
+
+    fullRadio.addEventListener("change", updateAmount);
+    partialRadio.addEventListener("change", updateAmount);
+
+    updateAmount(); // Set on load
+  });
+</script>
+
 </body>
 </html>
