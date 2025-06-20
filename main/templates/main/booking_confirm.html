@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Booking Confirmed{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row align-items-center">
+    
+    <!-- Left Side: Image -->
+    <div class="col-md-5 mb-4 mb-md-0 text-center">
+      <img src="{% static 'main/images/service1.png' %}" alt="Booking Confirmed" class="img-fluid rounded shadow">
+    </div>
+
+    <!-- Right Side: Booking Info -->
+    <div class="col-md-7">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="text-success fw-bold mb-3">✅ Booking Confirmed!</h2>
+
+          <p><strong>Name:</strong> {{ booking.name }}</p>
+          <p><strong>Email:</strong> {{ booking.email }}</p>
+          <p><strong>Phone:</strong> {{ booking.phone }}</p>
+          <p><strong>Address:</strong> {{ booking.address }}</p>
+
+          <hr>
+
+          <h5 class="fw-bold">Service Summary</h5>
+          <p><strong>Total Service Price:</strong> £{{ booking.final_amount }}</p>
+
+          {% if booking.payment_option == 'full' %}
+            <p><strong>Paid Now:</strong> £{{ booking.final_amount|floatformat:2 }}</p>
+            <p><strong>Pending Balance:</strong> £0.00</p>
+          {% else %}
+            <p><strong>Paid Now:</strong> £20.00</p>
+            <p><strong>Pending Balance:</strong> £{{ booking.final_amount|add:"-20"|floatformat:2 }}</p>
+          {% endif %}
+
+          <hr>
+          <p class="text-muted">We’ve sent a confirmation to your email. Our team will contact you shortly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

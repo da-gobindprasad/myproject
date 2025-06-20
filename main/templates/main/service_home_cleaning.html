@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Home Cleaning - MyCompany{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row align-items-center">
+    <!-- Image -->
+<div class="col-md-6 mb-4 mb-md-0 d-flex justify-content-center">
+  <img src="{% static 'main/images/service1.png' %}" alt="Home Cleaning" class="img-fluid rounded shadow" style="max-height: 420px; object-fit: cover;">
+</div>
+
+    <!-- Description -->
+    <div class="col-md-6">
+      <h2 class="fw-bold">Home Cleaning</h2>
+      <p>
+        Our professional home cleaning service ensures every corner of your home sparkles. 
+        We cover kitchen, bathroom, floors, dusting, and sanitization using eco-friendly supplies.
+      </p>
+      <!-- What's Included Section -->
+<div class="mt-5">
+  <h4 class="fw-bold mb-4">What's Included in Home Cleaning</h4>
+  <div class="row row-cols-1 row-cols-md-2 g-3">
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Sweeping and mopping floors</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Dusting furniture and surfaces</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Cleaning ceiling fans and light fixtures</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Vacuuming carpets and rugs</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Kitchen slab and appliance wipe-down</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Bathroom disinfecting and scrubbing</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Mirror and glass cleaning</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Window sills and grills wipe-down</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Removing cobwebs</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Trash removal and bin sanitization</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Baseboards and corners cleaning</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Wardrobe and cupboard exterior cleaning</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Doors and door handles sanitization</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Light switches and control panel cleaning</div>
+    <div class="col"><i class="bi bi-check-circle-fill text-success me-2"></i> Balcony sweeping and mopping</div>
+  </div>
+</div>
+
+    </div>
+  </div>
+<!-- Book Button -->
+<div class="text-center mt-5 mb-4">
+<a href="{% url 'booking_availability' %}" class="btn btn-primary btn-lg px-5 py-2">Book Now</a>
+</div>
+{% endblock %}

@@ -1,0 +1,178 @@
+<!-- main/templates/main/home.html -->
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Home - MyCompany{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Left Text and Right PNG Image -->
+<section class="py-2" style="background: linear-gradient(135deg, #0d6efd, #6610f2); color: #d6eaf8;">
+  <div class="container">
+    <div class="row align-items-center" style="min-height: 400px;">
+      
+      <!-- Left: Text -->
+      <div class="col-lg-8 text-start">
+        <h1 class="display-4 fw-bold">Welcome to <br> Scotland Cleaning Services</h1>
+        <p class="lead">We provide top-notch cleaning services to make your life easier.</p>
+        <a href="#services" class="btn btn-light btn-lg mt-3">Explore Our Services</a>
+      </div>
+
+      <!-- Right: PNG Image -->
+      <div class="col-lg-4 text-end">
+         <img src="{% static 'main/images/hero.png' %}" alt="Hero Image" class="img-fluid" style="object-fit: cover;">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Our Services Section: Responsive -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <!-- Section Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Our Services</h2>
+      <p class="text-muted">What we offer to make your life cleaner and easier.</p>
+    </div>
+
+    <!-- Cards Grid -->
+
+    <div class="row g-4">
+      {% comment "Card Template (Repeat for each service)" %}
+      
+            <div class="card h-100 shadow-sm service-card">
+                <img src="{% static 'main/images/service1.png' %}" class="card-img-top" alt="Home Cleaning">
+                <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <h5 class="card-title">Home Cleaning</h5>
+                    <p class="card-text">Comprehensive home cleaning services tailored to your needs.</p>
+                </div>
+                <div class="text-end">
+                    <button class="btn btn-sm btn-primary">Book Now</button>
+                </div>
+            </div>
+
+    </div>
+      {% endcomment %}
+
+      <!-- Card 1 -->
+      <div class="col-12 col-md-6 col-lg-4">
+                <a href="{% url 'service_home_cleaning' %}" class="text-decoration-none text-dark">
+
+        <div class="card h-100 shadow">
+          <img src="{% static 'main/images/service1.png' %}" class="card-img-top" alt="Service 1" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Home Cleaning</h5>
+            <p class="card-text">Professional cleaning for your home, including kitchen, bathroom, and floors.</p>
+          </div>
+        </div>
+                </a>
+
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow">
+          <img src="{% static 'main/images/service2.png' %}" class="card-img-top" alt="Service 2" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Office Cleaning</h5>
+            <p class="card-text">Keep your office spaces clean and fresh with our scheduled services.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow">
+          <img src="{% static 'main/images/service3.png' %}" class="card-img-top" alt="Service 3" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Carpet Cleaning</h5>
+            <p class="card-text">Deep cleaning and stain removal for carpets and rugs of all sizes.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow">
+          <img src="{% static 'main/images/service4.png' %}" class="card-img-top" alt="Service 4" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Window Cleaning</h5>
+            <p class="card-text">Sparkling clean windows for homes and buildings, inside and out.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow">
+          <img src="{% static 'main/images/service5.png' %}" class="card-img-top" alt="Service 5" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Move-in / Move-out</h5>
+            <p class="card-text">Full cleaning services when you're shifting in or out of a place.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow">
+          <img src="{% static 'main/images/service6.png' %}" class="card-img-top" alt="Service 6" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Sanitization</h5>
+            <p class="card-text">Disinfection and sanitization for home, office, or commercial spaces.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Why Choose Us</h2>
+      <p class="text-muted">Here’s what makes us different from the rest.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Feature 1 -->
+      <div class="col-md-4 text-center">
+        <div class="p-4 border rounded shadow-sm h-100">
+          <div class="mb-3">
+            <i class="bi bi-star-fill text-primary fs-1"></i>
+          </div>
+          <h5>Top-Rated Services</h5>
+          <p>We’re loved by hundreds of happy customers for our quality and consistency.</p>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="col-md-4 text-center">
+        <div class="p-4 border rounded shadow-sm h-100">
+          <div class="mb-3">
+            <i class="bi bi-shield-lock-fill text-success fs-1"></i>
+          </div>
+          <h5>Trusted & Secure</h5>
+          <p>All our staff are background-checked and trained to maintain high standards.</p>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="col-md-4 text-center">
+        <div class="p-4 border rounded shadow-sm h-100">
+          <div class="mb-3">
+            <i class="bi bi-clock-fill text-warning fs-1"></i>
+          </div>
+          <h5>On-Time & Flexible</h5>
+          <p>We value your time — book when it suits you and we’ll be there on time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

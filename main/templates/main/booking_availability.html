@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Check Availability{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row align-items-center">
+    
+    <!-- Left: Image -->
+    <div class="col-md-6 mb-4 mb-md-0">
+      <img src="{% static 'main/images/service1.png' %}" class="img-fluid rounded shadow" alt="Booking Image">
+    </div>
+
+    <!-- Right: Booking Steps -->
+    <div class="col-md-6">
+      <h2 class="fw-bold mb-4 text-center text-md-start">Check Availability</h2>
+
+      <!-- Step 1: Select Date -->
+      <div class="mb-4">
+        <label for="booking-date" class="form-label fw-semibold">1️⃣ Select a Date</label>
+        <input type="date" id="booking-date" class="form-control" min="{{ today|date:'Y-m-d' }}">
+      </div>
+
+      <!-- Step 2: Time Slots -->
+      <div id="time-slot-section" class="mb-4" style="display: none;">
+        <label class="form-label fw-semibold">2️⃣ Choose a Time Slot</label>
+        <div class="d-flex flex-wrap gap-2">
+          <button class="btn btn-outline-primary slot-btn">9:00 AM</button>
+          <button class="btn btn-outline-primary slot-btn">10:30 AM</button>
+          <button class="btn btn-outline-primary slot-btn">12:00 PM</button>
+          <button class="btn btn-outline-primary slot-btn">2:00 PM</button>
+          <button class="btn btn-outline-primary slot-btn">4:30 PM</button>
+          <button class="btn btn-outline-primary slot-btn">6:00 PM</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Next Button -->
+      <div id="next-button" style="display: none;">
+        <label class="form-label fw-semibold">3️⃣ Confirm & Proceed</label>
+        <div class="text-start">
+        <a href="{% url 'property_details' %}" class="btn btn-success btn-lg px-5">Next</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script -->
+<script>
+  const dateInput = document.getElementById("booking-date");
+  const slotSection = document.getElementById("time-slot-section");
+  const nextButton = document.getElementById("next-button");
+  const slotButtons = document.querySelectorAll(".slot-btn");
+
+  let selectedSlot = null;
+
+  dateInput.addEventListener("change", () => {
+    slotSection.style.display = "block";
+  });
+
+  slotButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      slotButtons.forEach(b => b.classList.remove("active", "btn-primary"));
+      btn.classList.add("active", "btn-primary");
+      selectedSlot = btn.textContent;
+      nextButton.style.display = "block";
+    });
+  });
+</script>
+{% endblock %}

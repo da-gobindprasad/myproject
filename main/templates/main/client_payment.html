@@ -1,0 +1,147 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Client & Payment{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+
+    <!-- LEFT: Client Info -->
+    <div class="col-md-7">
+      <h2 class="fw-bold mb-4">Client Details</h2>
+
+      <form method="post" onsubmit="return prepareFinalAmount()">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" name="name" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-control" name="email" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-control" name="phone" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Complete Address</label>
+          <textarea class="form-control" name="address" rows="3" required></textarea>
+        </div>
+
+        <hr class="my-4">
+        <h4 class="mb-3">Payment Options</h4>
+
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="radio" name="payment_option" id="pay20" value="partial" checked onclick="updatePayment(false)">
+          <label class="form-check-label" for="pay20">
+            Pay £20 now, rest before service
+          </label>
+        </div>
+
+        <div class="form-check mb-4">
+          <input class="form-check-input" type="radio" name="payment_option" id="payFull" value="full" onclick="updatePayment(true)">
+          <label class="form-check-label" for="payFull">
+            Pay full now & get 5% discount
+          </label>
+        </div>
+
+        <input type="hidden" name="final_amount" id="finalAmountInput" value="">
+
+        <button type="submit" class="btn btn-success px-5">Confirm Booking</button>
+      </form>
+    </div>
+
+    <!-- RIGHT: Summary -->
+    <div class="col-md-5 mt-5 mt-md-0">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="fw-bold mb-3">Amount Summary</h5>
+
+          <p class="d-flex justify-content-between">
+            <span>Service Price:</span>
+            <span id="price">£{{ total }}</span>
+          </p>
+
+          <p class="d-flex justify-content-between text-success" id="discountRow" style="display: none;">
+            <span>5% Discount:</span>
+            <span id="discount">−£0.00</span>
+          </p>
+
+          <p class="d-flex justify-content-between text-danger" id="balanceRow">
+            <span>Balance to Pay Later:</span>
+            <span id="balance">£0.00</span>
+          </p>
+
+          <hr>
+
+          <p class="d-flex justify-content-between fw-bold">
+            <span>Total Pay Now:</span>
+            <span id="payable">£20</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- JS to calculate price -->
+<script>
+  const servicePrice = parseFloat('{{ total }}');
+  const discountRate = 0.05;
+
+  const priceEl = document.getElementById("price");
+  const discountEl = document.getElementById("discount");
+  const discountRow = document.getElementById("discountRow");
+
+  const payableEl = document.getElementById("payable");
+  const balanceEl = document.getElementById("balance");
+  const balanceRow = document.getElementById("balanceRow");
+
+  function updatePayment(fullPay) {
+    priceEl.textContent = `£${servicePrice.toFixed(2)}`;
+
+    if (fullPay) {
+      const discount = servicePrice * discountRate;
+      const final = servicePrice - discount;
+
+      discountEl.textContent = `−£${discount.toFixed(2)}`;
+      payableEl.textContent = `£${final.toFixed(2)}`;
+      balanceEl.textContent = `£0.00`;
+
+      discountRow.style.display = "flex";
+      balanceRow.style.display = "flex";
+    } else {
+      const balance = servicePrice - 20;
+
+      discountEl.textContent = `−£0.00`;
+      payableEl.textContent = `£20.00`;
+      balanceEl.textContent = `£${balance.toFixed(2)}`;
+
+      discountRow.style.display = "none";
+      balanceRow.style.display = "flex";
+    }
+  }
+
+  function prepareFinalAmount() {
+    const fullPay = document.getElementById('payFull').checked;
+    let finalAmount = 0;
+    if (fullPay) {
+      const discount = servicePrice * discountRate;
+      finalAmount = servicePrice - discount;
+    } else {
+      finalAmount = 20;
+    }
+
+    document.getElementById('finalAmountInput').value = finalAmount.toFixed(2);
+    return true;
+  }
+
+  updatePayment(false);
+</script>
+{% endblock %}
