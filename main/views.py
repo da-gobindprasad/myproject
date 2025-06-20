@@ -98,3 +98,26 @@ def booking_confirm(request):
     request.session.pop('final_amount', None)
 
     return render(request, 'main/booking_confirm.html', {'booking': booking})
+
+from django.shortcuts import render
+
+def services(request):
+    services = [
+        {'title': 'House Cleaning', 'description': 'Routine and deep cleaning for homes.', 'icon': '🏠', 'image': 'main/images/service1.png'},
+        {'title': 'Office Cleaning', 'description': 'Professional cleaning for workspaces.', 'icon': '🏢', 'image': 'main/images/service2.png'},
+        {'title': 'End of Tenancy', 'description': 'Move-out full cleaning.', 'icon': '🔁', 'image': 'main/images/service3.png'},
+        {'title': 'Carpet Cleaning', 'description': 'Steam and stain removal for carpets.', 'icon': '🧼', 'image': 'main/images/service4.png'},
+        {'title': 'Window Cleaning', 'description': 'Streak-free window washing.', 'icon': '🪟', 'image': 'main/images/service5.png'},
+        {'title': 'After Party Cleaning', 'description': 'Post-event full clean-up.', 'icon': '🎉', 'image': 'main/images/service6.png'},
+        {'title': 'Sofa Cleaning', 'description': 'Cleaning fabric and leather sofas.', 'icon': '🛋️', 'image': 'main/images/service1.png'},
+        {'title': 'Kitchen Deep Clean', 'description': 'Degreasing appliances & counters.', 'icon': '🍳', 'image': 'main/images/service2.png'},
+        {'title': 'Bathroom Sanitization', 'description': 'Disinfection of all bathroom surfaces.', 'icon': '🛁', 'image': 'main/images/service3.png'},
+        {'title': 'Curtain Cleaning', 'description': 'Steam/dry cleaning of curtains.', 'icon': '🎭', 'image': 'main/images/service4.png'},
+        {'title': 'Mattress Cleaning', 'description': 'Dust mite & stain removal.', 'icon': '🛏️', 'image': 'main/images/service5.png'},
+        {'title': 'Balcony & Terrace', 'description': 'Cleaning garden and terrace areas.', 'icon': '🌿', 'image': 'main/images/service6.png'},
+        {'title': 'Commercial Deep Clean', 'description': 'Heavy-duty commercial space cleaning.', 'icon': '🏬', 'image': 'main/images/service1.png'},
+        {'title': 'Post-Renovation Cleaning', 'description': 'Clean-up after construction.', 'icon': '🚧', 'image': 'main/images/service2.png'},
+        {'title': 'Move-In Cleaning', 'description': 'Pre-move deep cleaning.', 'icon': '📦', 'image': 'main/images/service3.png'},
+        {'title': 'Fridge & Appliance', 'description': 'Cleaning kitchen equipment.', 'icon': '🧊', 'image': 'main/images/service4.png'},
+    ]
+    return render(request, 'main/services.html', {'services': services})

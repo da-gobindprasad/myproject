@@ -8,5 +8,6 @@ urlpatterns = [
     path('book/property-details/', views.property_details, name='property_details'),
     path('book/client-payment/', views.client_payment, name='client_payment'),
     path('book/confirm/', views.booking_confirm, name='booking_confirm'),
+    path('services/', views.services, name='services'),
 
 ]
